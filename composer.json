@@ -1,0 +1,22 @@
+{
+  "name": "lidmo/lidmo",
+  "description": "WP plugin start",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Lídmo",
+      "email": "suporte@lidmo.com.br"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "lidmo/wp-foundation": "dev-main",
+    "monolog/monolog": "^2.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Lidmo\\": "src/"
+    }
+  }
+}
