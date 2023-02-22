@@ -12,7 +12,7 @@ class SettingsController
     public function __construct()
     {
 
-        $settings = new \WPPluginStart\Includes\Settings();
+        $settings = new Settings();
         $this->options = $settings->getOptions();
 
     }

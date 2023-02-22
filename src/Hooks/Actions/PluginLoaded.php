@@ -2,13 +2,11 @@
 
 namespace WPPluginStart\Hooks\Actions;
 
+use Illuminate\Support\Str;
 use Lidmo\WP\Foundation\Hooks\Hook;
 
 class PluginLoaded extends Hook
 {
-    protected $name = 'plugin_loaded';
-    protected $type = 'action';
-
     public function handle($plugin)
     {
         if($plugin === PREFIX_PLUGIN_FILE){

@@ -19,6 +19,7 @@ define('PREFIX_PLUGIN_FILE', __FILE__);
 $plugin = require_once 'bootstrap.php';
 
 define('PREFIX_PLUGIN_PATH', $plugin->path());
+define('PREFIX_PLUGIN_URL', $plugin->url());
 define('PREFIX_PLUGIN_NAME', $plugin->name());
 define('PREFIX_PLUGIN_VERSION', $plugin->version());
 define('PREFIX_PLUGIN_TEMPLATE_PATH', $plugin->templatePath());

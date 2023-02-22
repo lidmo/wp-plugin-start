@@ -9,12 +9,12 @@ class PublicController implements PublicInterface {
 
 	public function enqueueStyles() {
 
-		wp_enqueue_style( PREFIX_PLUGIN_NAME, self::PUBLIC_CSS_FOLDER . 'public.min.css', [], null, 'all' );
+		wp_enqueue_style( PREFIX_PLUGIN_NAME, PREFIX_PLUGIN_URL . self::PUBLIC_CSS_FOLDER . 'public.min.css', [], null, 'all' );
 
 	}
 	public function enqueueScripts() {
 
-		wp_enqueue_script( PREFIX_PLUGIN_NAME, self::PUBLIC_JS_FOLDER . 'public.min.js', ['jquery'], null, true );
+		wp_enqueue_script( PREFIX_PLUGIN_NAME, PREFIX_PLUGIN_URL . self::PUBLIC_JS_FOLDER . 'public.min.js', ['jquery'], null, true );
 
         $ajaxController = new AjaxController();
         wp_localize_script(
