@@ -13,12 +13,17 @@
   ],
   "require": {
     "php": "^7.4",
-    "lidmo/wp-foundation": "dev-main",
-    "monolog/monolog": "^2.9"
+    "lidmo/wp-foundation": "dev-main"
   },
   "autoload": {
     "psr-4": {
-      "Lidmo\\": "src/"
-    }
+      "WPPluginStart\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.4"
   }
 }

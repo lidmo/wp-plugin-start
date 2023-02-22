@@ -1,6 +1,6 @@
 <?php
 
-namespace Lidmo\Hooks\Actions;
+namespace WPPluginStart\Hooks\Actions;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 
@@ -11,12 +11,9 @@ class PluginLoaded extends Hook
 
     public function handle($plugin)
     {
-        $currentPath = dirname($plugin);
-        $pluginPath = realpath(dirname(__FILE__) . '/../../../');
-        if($currentPath === $pluginPath){
-            $name = str_replace(WP_PLUGIN_DIR . '/', '', $pluginPath);
-            $plugin = lidmo_plugin($name);
-            $plugin->log->info("Plugin {$name} iniciado com sucesso", [$name => $plugin]);
+        if($plugin === PREFIX_PLUGIN_FILE){
+            $name = str_replace(WP_PLUGIN_DIR . '/', '', dirname($plugin));
+            lidmo_logger('info', "Plugin {$name} iniciado com sucesso", [$name => $plugin]);
         }
     }
 }

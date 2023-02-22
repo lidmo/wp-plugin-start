@@ -1,6 +1,6 @@
 <?php
 
-namespace Lidmo\Hooks\Filters;
+namespace WPPluginStart\Hooks\Filters;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 

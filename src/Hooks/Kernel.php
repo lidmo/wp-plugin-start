@@ -1,9 +1,9 @@
 <?php
 
-namespace Lidmo\Hooks;
+namespace WPPluginStart\Hooks;
 
-use Lidmo\Hooks\Actions\PluginLoaded;
-use Lidmo\Hooks\Filters\TheContent;
+use WPPluginStart\Hooks\Actions\PluginLoaded;
+use WPPluginStart\Hooks\Filters\TheContent;
 use Lidmo\WP\Foundation\Hooks\Kernel as HooksKernel;
 
 class Kernel extends HooksKernel

@@ -1,6 +1,6 @@
 <?php
-$plugin = new \Lidmo\WP\Foundation\Plugin(str_replace(WP_PLUGIN_DIR . '/', '', dirname(__FILE__)), __FILE__);
 
-$plugin->singleton(\Lidmo\WP\Foundation\Contracts\Kernel::class, \Lidmo\Hooks\Kernel::class);
+$plugin = new \Lidmo\WP\Foundation\Plugin(PREFIX_PLUGIN_FILE);
+$plugin->singleton(\Lidmo\WP\Foundation\Contracts\Kernel::class, \WPPluginStart\Hooks\Kernel::class);
 
 return $plugin;

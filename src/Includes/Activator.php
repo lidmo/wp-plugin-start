@@ -1,6 +1,6 @@
 <?php
 
-namespace Lidmo\Includes;
+namespace WPPluginStart\Includes;
 
 class Activator
 {
