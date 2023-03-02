@@ -3,6 +3,7 @@
 namespace WPPluginStart\Hooks;
 
 use WPPluginStart\Hooks\Actions\AdminEnqueueScripts;
+use WPPluginStart\Hooks\Actions\AdminHead;
 use WPPluginStart\Hooks\Actions\AdminInit;
 use WPPluginStart\Hooks\Actions\AdminMenu;
 use WPPluginStart\Hooks\Actions\Init;
@@ -25,6 +26,7 @@ class Kernel extends HooksKernel
     protected $hooks = [
         // Actions
         PluginLoaded::class,
+        AdminHead::class,
         AdminEnqueueScripts::class,
         AdminInit::class,
         AdminMenu::class,

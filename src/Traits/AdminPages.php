@@ -14,7 +14,7 @@ Trait AdminPages {
 				'page_title'    => 'WPPluginStart',
 				'menu_title'    => 'WPPluginStart',
 				'capability'    => 'manage_options',
-				'icon_url'      => 'dashicons-migrate',
+				'icon_url'      => 'dashicons-lidmo',
 				'position'      => 10,
 				'subpages'      => [
                     PREFIX_PLUGIN_NAME . '-sub' => [
