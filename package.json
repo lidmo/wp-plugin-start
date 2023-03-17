@@ -1,0 +1,24 @@
+{
+  "name": "lidmo/wp-plugin-start",
+  "description": "Lídmo WP plugin start",
+  "scripts": {
+    "watch": "node-sass --watch app/Front/css/sass/base.scss app/Front/css/public.css",
+    "watch minify": "node-sass --watch app/Front/css/sass/base.scss app/Front/css/public.min.css --output-style compressed",
+    "compile": "node-sass  app/Front/css/sass/base.scss  app/Front/css/public.css",
+    "minify": "node-sass  app/Front/css/sass/base.scss  app/Front/css/public.min.css --output-style compressed"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-livereload": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify-es": "^3.0.0",
+    "gulp-zip": "^5.1.0",
+    "merge-stream": "^2.0.0",
+    "node-sass": "^7.0.1",
+    "nodemon": "^2.0.19",
+    "onchange": "^7.1.0"
+  }
+}

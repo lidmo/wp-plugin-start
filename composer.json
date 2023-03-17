@@ -1,0 +1,37 @@
+{
+  "name": "lidmo/wp-plugin-start",
+  "description": "Lídmo WP plugin start",
+  "type": "wordpress-plugin",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Lídmo",
+      "email": "suporte@lidmo.com.br"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "lidmo/wp-foundation": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "LidmoPrefix\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.4",
+    "wp-phpunit/wp-phpunit": "^6.1",
+    "yoast/phpunit-polyfills": "^1.0",
+    "roots/wordpress": "^6.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "roots/wordpress-core-installer": true
+    }
+  }
+}

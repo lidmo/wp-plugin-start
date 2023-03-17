@@ -1,0 +1,110 @@
+$gap: 0.75rem;
+$cols: 12;
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  grid-column-gap: $gap;
+  grid-row-gap: $gap;
+
+  @for $i from 1 through $cols {
+
+    &.items-l#{$i} {
+      grid-template-columns: repeat($i, 1fr);
+    }
+
+  }
+
+  @media only screen and (max-width: 1280px) {
+
+    @for $i from 1 through $cols {
+
+      &.items-lm#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+
+    }
+
+  }
+
+  @media only screen and (max-width: 999px) {
+
+    @for $i from 1 through $cols {
+
+      &.items-m#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+
+    }
+
+  }
+
+  @media only screen and (max-width: 666px) {
+
+    @for $i from 1 through $cols {
+
+      &.items-s#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+
+    }
+
+  }
+
+  /*
+   * Available Column Prefixes:
+   * l: Large PC Screens at least 1200px
+   * lm: LargeMedium Laptop & Small Screens between 1200px and 999px
+   * m: Medium Tablet Screens between 999px and 666px
+   * s: Small Mobile Screens 666px and below
+   */
+  .gcol {
+
+    @for $i from 1 through $cols {
+
+      &.l#{$i} {
+        grid-column: span $i;
+      }
+
+    }
+
+    @media only screen and (max-width: 1280px) {
+
+      @for $i from 1 through $cols {
+
+        &.lm#{$i} {
+          grid-column: span $i;
+        }
+
+      }
+
+    }
+
+    @media only screen and (max-width: 999px) {
+
+      @for $i from 1 through $cols {
+
+        &.m#{$i} {
+          grid-column: span $i;
+        }
+
+      }
+
+    }
+
+    @media only screen and (max-width: 666px) {
+
+      @for $i from 1 through $cols {
+
+        &.s#{$i} {
+          grid-column: span $i;
+        }
+
+      }
+
+    }
+
+  }
+
+
+}
