@@ -1,7 +1,7 @@
 {
   "name": "lidmo/wp-plugin-start",
   "description": "Lídmo WP plugin start",
-  "type": "wordpress-plugin",
+  "type": "project",
   "minimum-stability": "stable",
   "prefer-stable": true,
   "license": "proprietary",
