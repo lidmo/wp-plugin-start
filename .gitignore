@@ -2,3 +2,5 @@
 /vendor
 /node_modules
 /wordpress
+/composer.lock
+/package-lock.json

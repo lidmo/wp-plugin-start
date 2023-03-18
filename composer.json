@@ -13,7 +13,7 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "lidmo/wp-foundation": "dev-main"
+    "lidmo/wp-foundation": "dev-develop"
   },
   "autoload": {
     "psr-4": {

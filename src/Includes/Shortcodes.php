@@ -34,14 +34,16 @@ class Shortcodes
                         add_shortcode($shortcodeObj->getShortcodeName(), array($shortcodeObj, 'display'));
 
                     } else {
-
-                        lidmo_logger('error', "The $shortcode class needs to implement the Shortcodes Interface.");
+                        if(function_exists('lidmo_logger')) {
+                            lidmo_logger('error', "The $shortcode class needs to implement the Shortcodes Interface.");
+                        }
 
                     }
 
                 } else {
-
-                    lidmo_logger('error', "Class: $shortcode is not defined in the $this->folderDirPath folder");
+                    if(function_exists('lidmo_logger')) {
+                        lidmo_logger('error', "Class: $shortcode is not defined in the $this->folderDirPath folder");
+                    }
 
                 }
 

@@ -21,8 +21,9 @@ class WidgetsInitAction extends Hook
                     register_widget($widget);
 
                 } else {
-
-                    lidmo_logger('error', "Class: $widget is not defined in the $this->folderDirPath folder");
+                    if(function_exists('lidmo_logger')) {
+                        lidmo_logger('error', "Class: $widget is not defined in the $this->folderDirPath folder");
+                    }
 
                 }
 

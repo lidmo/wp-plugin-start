@@ -2,7 +2,6 @@
 
 namespace LidmoPrefix\Hooks\Actions;
 
-use Illuminate\Support\Str;
 use Lidmo\WP\Foundation\Hooks\Hook;
 
 class PluginLoadedAction extends Hook

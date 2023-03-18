@@ -20,13 +20,6 @@ if (!function_exists('lidmo_admin_menu_exists')) {
     }
 }
 
-if (!function_exists('lidmo_logger')) {
-    function lidmo_logger($level, $message, $context = [])
-    {
-        lidmo_plugin(LIDMO_PREFIX_PLUGIN_SLUG)->log->log($level, $message, $context);
-    }
-}
-
 if(!function_exists('lidmo_filter_data')) {
     function lidmo_filter_data($element)
     {
