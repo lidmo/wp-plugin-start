@@ -1,5 +1,5 @@
 <?php
-namespace Installer;
+namespace Lidmo\WP\Installer;
 
 use Composer\Script\Event;
 use Lidmo\WP\Foundation\Support\Str;
