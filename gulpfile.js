@@ -155,7 +155,7 @@ gulp.task( 'default', gulp.series( 'sass:compile', 'scripts:compile', 'watch' ) 
 
 var zipFileName = projectName + '.zip';
 gulp.task('export' , function (done) {
-    return gulp.src( [ './**', '!./node_modules/**', '!Gulp Install.txt', '!Plugin Install Guide' ], { base: '../'} )
+    return gulp.src( [ './**', '!./node_modules/**', '!./wordpress/**', '!./bin/**', '!Gulp Install.txt', '!Plugin Install Guide' ], { base: '../'} )
         .pipe(zip(zipFileName))
         .pipe(gulp.dest('..'))
         .on('end',  function () {

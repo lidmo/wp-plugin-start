@@ -23,15 +23,26 @@
       "src/helpers.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Lidmo\\WP\\Installer\\": "bin/Installer/"
+    },
+  },
   "require-dev": {
     "symfony/var-dumper": "^5.4",
     "wp-phpunit/wp-phpunit": "^6.1",
     "yoast/phpunit-polyfills": "^1.0",
-    "roots/wordpress": "^6.1"
+    "roots/wordpress": "^6.1",
+    "composer/composer": "dev-main"
   },
   "config": {
     "allow-plugins": {
       "roots/wordpress-core-installer": true
     }
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "Lidmo\\WP\\Installer\\PostCreateProject::changePrefix"
+    ]
   }
 }
