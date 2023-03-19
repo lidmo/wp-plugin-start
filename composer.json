@@ -1,9 +1,8 @@
 {
   "name": "lidmo/wp-plugin-start",
-  "description": "Lídmo WP plugin start",
+  "description": "WP plugin start based on laravel features",
   "type": "project",
   "minimum-stability": "dev",
-  "prefer-stable": true,
   "license": "proprietary",
   "authors": [
     {

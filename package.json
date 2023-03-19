@@ -1,6 +1,6 @@
 {
   "name": "lidmo/wp-plugin-start",
-  "description": "Lídmo WP plugin start",
+  "description": "WP plugin start based on laravel features",
   "scripts": {
     "watch": "node-sass --watch app/Front/css/sass/base.scss app/Front/css/public.css",
     "watch minify": "node-sass --watch app/Front/css/sass/base.scss app/Front/css/public.min.css --output-style compressed",

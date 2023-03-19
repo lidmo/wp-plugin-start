@@ -1,8 +1,8 @@
 <?php
 
 /*
- * Plugin Name: WP plugin start
- * Description: WP plugin start
+ * Plugin Name: Lidmo Prefix
+ * Description: WP plugin start based on laravel features
  * Version: 1.0.0
  * Author: Lídmo
  * Author URI: https://lidmo.com.br
