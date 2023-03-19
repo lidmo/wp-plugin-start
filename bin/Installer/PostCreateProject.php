@@ -18,7 +18,7 @@ class PostCreateProject
     protected array $replaces = [];
 
 
-    private function generateReplaces($replace, $search = 'lidmo-prefix')
+    private function generateReplaces($replace, $search)
     {
         $this->replaces = [
             $search => $replace,
@@ -92,13 +92,21 @@ class PostCreateProject
     public static function changePrefix(Event $event)
     {
         $self = new self;
-        $self->generateReplaces(Str::slug(basename(self::_getPath($event))));
+        $self->generateReplaces(Str::slug(basename(self::_getPath($event))), 'lidmo-prefix');
         $self->scanTheDir('.');
     }
 
     private static function _getPath(Event $event)
     {
         $package = $event->getComposer()->getPackage();
-        return $event->getComposer()->getInstallationManager()->getInstallPath($package);
+        $path = $event->getComposer()->getInstallationManager()->getInstallPath($package);
+        $standardPath = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $path);
+        $replacement = self::_createPath('vendor', 'lidmo', 'wp-plugin-start');
+        return str_replace($replacement, '', $standardPath);
+    }
+
+    private static function _createPath()
+    {
+        return preg_replace('~[/\\\]+~', DIRECTORY_SEPARATOR, implode(DIRECTORY_SEPARATOR, func_get_args()));
     }
 }
