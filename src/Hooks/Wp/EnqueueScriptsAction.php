@@ -1,12 +1,12 @@
 <?php
 
-namespace LidmoPrefix\Hooks\Actions;
+namespace LidmoPrefix\Hooks\Wp;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 use LidmoPrefix\Interfaces\AjaxInterface;
 use LidmoPrefix\Interfaces\PublicInterface;
 
-class WpEnqueueScriptsAction extends Hook implements PublicInterface, AjaxInterface
+class EnqueueScriptsAction extends Hook implements PublicInterface, AjaxInterface
 {
     public function handle()
     {

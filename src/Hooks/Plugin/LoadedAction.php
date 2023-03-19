@@ -1,11 +1,12 @@
 <?php
 
-namespace LidmoPrefix\Hooks\Actions;
+namespace LidmoPrefix\Hooks\Plugin;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 
-class PluginLoadedAction extends Hook
+class LoadedAction extends Hook
 {
+
     public function handle($plugin)
     {
         if($plugin === LIDMO_PREFIX_PLUGIN_FILE){

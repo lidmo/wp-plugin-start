@@ -1,11 +1,11 @@
 <?php
 
-namespace LidmoPrefix\Hooks\Actions;
+namespace LidmoPrefix\Hooks\Widgets;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 use LidmoPrefix\Traits\ClassList;
 
-class WidgetsInitAction extends Hook
+class InitAction extends Hook
 {
     use ClassList;
 

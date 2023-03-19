@@ -3,17 +3,21 @@
 namespace LidmoPrefix\Includes;
 
 
+use LidmoNumerology\Traits\Singleton;
+
 class UserRoles {
 
+    use Singleton;
+
     const CUSTOM_USER_ROLES = [
-        'example_role' => [
+        /*'example_role' => [
             'display_name'          => 'example Role',
             'default_capabilities'  => [
                 'read'         => true,
                 'edit_posts'   => true,
                 'upload_files' => true,
             ]
-        ]
+        ]*/
     ];
 
     public function registerUserRoles(){

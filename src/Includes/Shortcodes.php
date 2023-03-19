@@ -2,12 +2,13 @@
 
 namespace LidmoPrefix\Includes;
 
+use LidmoNumerology\Traits\Singleton;
 use LidmoPrefix\Traits\ClassList;
 
 class Shortcodes
 {
 
-    use ClassList;
+    use ClassList, Singleton;
 
     public function __construct()
     {

@@ -3,6 +3,7 @@
 
 namespace LidmoPrefix\Includes;
 
+use LidmoNumerology\Traits\Singleton;
 use LidmoPrefix\Interfaces\AdminInterface;
 use LidmoPrefix\Interfaces\TemplatesInterface;
 use LidmoPrefix\Traits\AdminPages;
@@ -10,9 +11,9 @@ use LidmoPrefix\Traits\AdminPages;
 class AdminMenuPages implements AdminInterface
 {
 
-    use AdminPages;
+    use AdminPages, Singleton;
 
-    protected $adminTemplatesPath;
+    protected string $adminTemplatesPath;
 
     public function __construct()
     {

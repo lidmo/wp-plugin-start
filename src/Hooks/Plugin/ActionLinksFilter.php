@@ -1,10 +1,10 @@
 <?php
 
-namespace LidmoPrefix\Hooks\Filters;
+namespace LidmoPrefix\Hooks\Plugin;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 
-class PluginActionLinksFilter extends Hook
+class ActionLinksFilter extends Hook
 {
     protected $acceptedArgs = 4;
 

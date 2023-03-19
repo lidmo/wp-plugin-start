@@ -3,7 +3,11 @@
 namespace LidmoPrefix\Includes;
 
 
+use LidmoNumerology\Traits\Singleton;
+
 class UserCapabilities {
+
+    use Singleton;
 
     const CUSTOM_USER_CAPABILITIES = [
         'lidmo_manage_options' => ['administrator']

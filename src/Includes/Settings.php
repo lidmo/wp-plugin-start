@@ -2,12 +2,13 @@
 
 namespace LidmoPrefix\Includes;
 
+use LidmoNumerology\Traits\Singleton;
 use LidmoPrefix\Traits\Settings as SettingsFields;
 
 class Settings
 {
 
-    use SettingsFields;
+    use SettingsFields, Singleton;
 
     private $plugin_slug;
     private $textdomain;

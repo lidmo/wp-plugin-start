@@ -1,6 +1,6 @@
 <?php
 
-namespace LidmoPrefix\Hooks\Actions;
+namespace LidmoPrefix\Hooks\Defaults;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 use LidmoPrefix\Includes\Shortcodes;
@@ -9,29 +9,28 @@ use LidmoPrefix\Includes\UserRoles;
 
 class InitAction extends Hook
 {
+    protected $name = 'init';
+
     public function handle()
     {
-        //$this->registerUserRoles();
+        $this->registerUserRoles();
         $this->registerUserCapabilities();
         $this->registerShortcodes();
         $this->registerPostTypes();
     }
 
     private function registerUserRoles(){
-        $userRoles = new UserRoles();
-        $userRoles->registerUserRoles();
+        UserRoles::getInstance()->registerUserRoles();
     }
 
     private function registerUserCapabilities()
     {
-        $userCapabilities = new UserCapabilities();
-        $userCapabilities->registerUserCapabilities();
+        UserCapabilities::getInstance()->registerUserCapabilities();
     }
 
     private function registerShortcodes()
     {
-        $shortcodes = new Shortcodes();
-        $shortcodes->registerShortcodes();
+       Shortcodes::getInstance()->registerShortcodes();
     }
 
     private function registerPostTypes()

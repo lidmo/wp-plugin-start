@@ -12,11 +12,11 @@ if (!defined('WPINC')) {
     die;
 }
 
-require 'vendor/autoload.php';
+require __DIR__ .'/vendor/autoload.php';
 
 define('LIDMO_PREFIX_PLUGIN_FILE', __FILE__);
 
-$plugin = require_once 'bootstrap.php';
+$plugin = require_once __DIR__ . '/bootstrap.php';
 
 define('LIDMO_PREFIX_PLUGIN_PATH', $plugin->path());
 define('LIDMO_PREFIX_PLUGIN_URL', $plugin->url());

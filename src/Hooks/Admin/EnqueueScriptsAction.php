@@ -1,11 +1,11 @@
 <?php
 
-namespace LidmoPrefix\Hooks\Actions\Admin;
+namespace LidmoPrefix\Hooks\Admin;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 use LidmoPrefix\Interfaces\AdminInterface;
 
-class AdminEnqueueScriptsAction extends Hook implements AdminInterface
+class EnqueueScriptsAction extends Hook implements AdminInterface
 {
 
     public function handle()

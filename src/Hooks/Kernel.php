@@ -3,39 +3,27 @@
 namespace LidmoPrefix\Hooks;
 
 use Lidmo\WP\Foundation\Hooks\Kernel as HooksKernel;
-use LidmoPrefix\Hooks\Actions\Admin\AdminEnqueueScriptsAction;
-use LidmoPrefix\Hooks\Actions\Admin\AdminHeadAction;
-use LidmoPrefix\Hooks\Actions\Admin\AdminInitAction;
-use LidmoPrefix\Hooks\Actions\Admin\AdminMenuAction;
-use LidmoPrefix\Hooks\Actions\InitAction;
-use LidmoPrefix\Hooks\Actions\PluginLoadedAction;
-use LidmoPrefix\Hooks\Actions\WpEnqueueScriptsAction;
-use LidmoPrefix\Hooks\Filters\BodyClassFilter;
-use LidmoPrefix\Hooks\Filters\PluginActionLinksFilter;
-use LidmoPrefix\Hooks\Filters\TemplateIncludeFilter;
-use LidmoPrefix\Hooks\Filters\TheContentFilter;
-use LidmoPrefix\Hooks\Filters\ThemePageTemplatesFilter;
-use LidmoPrefix\Hooks\Filters\WpInsertPostDataFilter;
 
 class Kernel extends HooksKernel
 {
     protected $hooks = [
         // Actions
-        PluginLoadedAction::class,
-        AdminHeadAction::class,
-        AdminEnqueueScriptsAction::class,
-        AdminInitAction::class,
-        AdminMenuAction::class,
-        InitAction::class,
-        WpEnqueueScriptsAction::class,
-        // WidgetsInit::class,
+        \LidmoPrefix\Hooks\Defaults\InitAction::class,
+        \LidmoPrefix\Hooks\Plugin\LoadedAction::class,
+        \LidmoPrefix\Hooks\Wp\EnqueueScriptsAction::class,
+        \LidmoPrefix\Hooks\Admin\InitAction::class,
+        \LidmoPrefix\Hooks\Admin\EnqueueScriptsAction::class,
+        \LidmoPrefix\Hooks\Admin\HeadAction::class,
+        \LidmoPrefix\Hooks\Admin\MenuAction::class,
+
 
         // Filters
-        PluginActionLinksFilter::class,
-        TheContentFilter::class,
-        BodyClassFilter::class,
-        ThemePageTemplatesFilter::class,
-        WpInsertPostDataFilter::class,
-        TemplateIncludeFilter::class,
+        \LidmoPrefix\Hooks\Plugin\ActionLinksFilter::class,
+        \LidmoPrefix\Hooks\Defaults\BodyClassFilter::class,
+        \LidmoPrefix\Hooks\Defaults\ThemePageTemplatesFilter::class,
+        \LidmoPrefix\Hooks\Defaults\TheContentFilter::class,
+        \LidmoPrefix\Hooks\Wp\InsertPostDataFilter::class,
+        \LidmoPrefix\Hooks\Template\IncludeFilter::class,
+
     ];
 }

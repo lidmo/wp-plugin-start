@@ -1,11 +1,11 @@
 <?php
 
-namespace LidmoPrefix\Hooks\Filters;
+namespace LidmoPrefix\Hooks\Wp;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 use LidmoPrefix\Includes\PageTemplates;
 
-class WpInsertPostDataFilter extends Hook
+class InsertPostDataFilter extends Hook
 {
     public function handle($attributes)
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace LidmoPrefix\Hooks\Actions\Admin;
+namespace LidmoPrefix\Hooks\Admin;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 
-class AdminHeadAction extends Hook
+class HeadAction extends Hook
 {
 
     public function handle()
