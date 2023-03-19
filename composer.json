@@ -41,7 +41,8 @@
   },
   "scripts": {
     "post-create-project-cmd": [
-      "Lidmo\\WP\\Installer\\PostCreateProject::changePrefix"
+      "Lidmo\\WP\\Installer\\PostCreateProject::changePrefix",
+      "composer dump-autoload"
     ]
   }
 }
