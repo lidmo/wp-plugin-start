@@ -2,7 +2,7 @@
   "name": "lidmo/wp-plugin-start",
   "description": "Lídmo WP plugin start",
   "type": "project",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "license": "proprietary",
   "authors": [
@@ -26,7 +26,7 @@
   "autoload-dev": {
     "psr-4": {
       "Lidmo\\WP\\Installer\\": "bin/Installer/"
-    },
+    }
   },
   "require-dev": {
     "symfony/var-dumper": "^5.4",
