@@ -3,7 +3,7 @@
 
 namespace LidmoPrefix\Includes;
 
-use LidmoNumerology\Traits\Singleton;
+use LidmoPrefix\Traits\Singleton;
 use LidmoPrefix\Interfaces\AdminInterface;
 use LidmoPrefix\Interfaces\TemplatesInterface;
 use LidmoPrefix\Traits\AdminPages;
