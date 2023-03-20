@@ -17,10 +17,7 @@
   "autoload": {
     "psr-4": {
       "LidmoPrefix\\": "src/"
-    },
-    "files": [
-      "src/helpers.php"
-    ]
+    }
   },
   "autoload-dev": {
     "psr-4": {
