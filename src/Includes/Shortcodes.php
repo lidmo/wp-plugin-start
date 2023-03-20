@@ -2,7 +2,7 @@
 
 namespace LidmoPrefix\Includes;
 
-use LidmoNumerology\Traits\Singleton;
+use LidmoPrefix\Traits\Singleton;
 use LidmoPrefix\Traits\ClassList;
 
 class Shortcodes
