@@ -3,10 +3,10 @@
 namespace LidmoPrefix\Hooks\Wp;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
-use LidmoPrefix\Interfaces\AjaxInterface;
+use LidmoPrefix\Includes\Ajax;
 use LidmoPrefix\Interfaces\PublicInterface;
 
-class EnqueueScriptsAction extends Hook implements PublicInterface, AjaxInterface
+class EnqueueScriptsAction extends Hook implements PublicInterface
 {
     public function handle()
     {
@@ -29,19 +29,7 @@ class EnqueueScriptsAction extends Hook implements PublicInterface, AjaxInterfac
         wp_localize_script(LIDMO_PREFIX_PLUGIN_SLUG, 'lidmoPrefixOptions', array_merge([
             'ajax_url' => admin_url('admin-ajax.php'),
             'security' => wp_create_nonce(LIDMO_PREFIX_PLUGIN_SLUG),
-        ], $this->getJSAjaxActions()));
-
-    }
-
-    protected function getJSAjaxActions()
-    {
-
-        $actions = array();
-        foreach (self::AJAX_ACTIONS as $ajaxAction => $ajaxData) {
-            $actions[$ajaxAction] = $ajaxAction;
-        }
-
-        return $actions;
+        ], Ajax::getJSAjaxActions()));
 
     }
 }
