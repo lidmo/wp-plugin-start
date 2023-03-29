@@ -11,7 +11,6 @@ class Settings
     use SettingsFields, Singleton;
 
     private $plugin_slug;
-    private $textdomain;
     private $options;
     private $settings;
 
@@ -19,7 +18,6 @@ class Settings
     {
 
         $this->plugin_slug = LIDMO_PREFIX_PLUGIN_SLUG;
-        $this->textdomain = str_replace('_', '-', LIDMO_PREFIX_PLUGIN_SLUG);
 
     }
 
@@ -33,7 +31,7 @@ class Settings
 
     public function addSettingsMenu()
     {
-        $page = add_submenu_page('lidmo', LIDMO_PREFIX_PLUGIN_NAME . ' Configurações', LIDMO_PREFIX_PLUGIN_NAME . ' Configurações', 'lidmo_manage_options', $this->plugin_slug . '-settings', array($this, 'settingsPage'));
+        $page = add_submenu_page('lidmo', LIDMO_PREFIX_PLUGIN_NAME . ' Configurações', 'Configurações', 'lidmo_manage_options', $this->plugin_slug . '-settings', array($this, 'settingsPage'));
     }
 
     public function addSettingsLink($links, $plugin_file, $plugin_data, $context)

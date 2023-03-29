@@ -6,6 +6,8 @@
  * Version: 1.0.0
  * Author: Lídmo
  * Author URI: https://lidmo.com.br
+ * Text Domain: lidmo-prefix
+ * Domain Path: /languages
  */
 
 if (!defined('WPINC')) {

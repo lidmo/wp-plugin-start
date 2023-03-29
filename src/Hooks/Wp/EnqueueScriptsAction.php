@@ -28,7 +28,7 @@ class EnqueueScriptsAction extends Hook implements PublicInterface
 
         wp_localize_script(LIDMO_PREFIX_PLUGIN_SLUG, 'lidmoPrefixOptions', array_merge([
             'ajax_url' => admin_url('admin-ajax.php'),
-            'security' => wp_create_nonce(LIDMO_PREFIX_PLUGIN_SLUG),
+            'security' => wp_create_nonce('lidmoPrefixAjaxNonce'),
         ], Ajax::getJSAjaxActions()));
 
     }
