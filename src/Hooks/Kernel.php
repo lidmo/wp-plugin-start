@@ -9,6 +9,7 @@ class Kernel extends HooksKernel
     protected $hooks = [
         // Actions
         \LidmoPrefix\Hooks\Defaults\InitAction::class,
+        \LidmoPrefix\Hooks\Defaults\PHPMailerInitAction::class,
         \LidmoPrefix\Hooks\Plugin\LoadedAction::class,
         \LidmoPrefix\Hooks\Wp\EnqueueScriptsAction::class,
         \LidmoPrefix\Hooks\Admin\InitAction::class,
