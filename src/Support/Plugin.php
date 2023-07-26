@@ -2,42 +2,44 @@
 
 namespace LidmoPrefix\Support;
 
-use Lidmo\WP\Foundation\Container;
 
 class Plugin
 {
     public static function instance()
     {
-        return Container::getInstance()->make(LIDMO_PREFIX_PLUGIN_SLUG, []);
+        return \Lidmo\WP\Foundation\Container::getInstance()->make(LIDMO_PREFIX_PLUGIN_SLUG, []);
     }
 
-    public static function getOption(string $key = '', $default = null)
+    public static function getOption(string $name = '', $default = null)
     {
         $settings = get_option(LIDMO_PREFIX_PLUGIN_SLUG, []);
-        if ($key != '') {
-            return $settings[$key] ?? $default;
+        if ($name != '') {
+            return $settings[$name] ?? $default;
         }
         return $settings;
     }
 
-    public static function getPostMeta(int $id, string $name, string $container_id = '')
+    public static function updateOption(string $name, $value): bool
     {
-        if (!function_exists('carbon_get_post_meta')) {
-            return '';
-        }
-        return carbon_get_post_meta($id, self::getPrefix() . $name, $container_id);
+        $settings = get_option(LIDMO_PREFIX_PLUGIN_SLUG, []);
+        $settings[$name] = $value;
+        return update_option(LIDMO_PREFIX_PLUGIN_SLUG, $settings);
     }
 
-    public static function getThePostMeta(string $name, string $container_id = '')
+    public static function deleteOption(string $name): bool
     {
-        if (!function_exists('carbon_get_the_post_meta')) {
-            return '';
-        }
-        return carbon_get_the_post_meta(self::getPrefix() . $name, $container_id);
+        $settings = get_option(LIDMO_PREFIX_PLUGIN_SLUG, []);
+        unset($settings[$name]);
+        return update_option(LIDMO_PREFIX_PLUGIN_SLUG, $settings);
     }
 
     public static function getPrefix(): string
     {
-        return str_replace('-', '_', LIDMO_PREFIX_PLUGIN_SLUG) . '_';
+        return str_replace('-', '_', LIDMO_PREFIX_PLUGIN_SLUG);
+    }
+
+    public static function getPrefixed(string $name): string
+    {
+        return self::getPrefix() . '_' . $name;
     }
 }

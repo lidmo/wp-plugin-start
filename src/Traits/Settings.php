@@ -66,14 +66,14 @@ trait Settings
     }
 
 
-    public function getSettingsPageTitle()
+    public function getSettingsPageTitle(): string
     {
 
         return 'Configurações do plugin';
 
     }
 
-    public function getSettingsPageDescription()
+    public function getSettingsPageDescription(): string
     {
 
         return 'Configurações do plugin ' . LIDMO_PREFIX_PLUGIN_NAME;

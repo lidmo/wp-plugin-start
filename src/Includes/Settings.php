@@ -31,14 +31,14 @@ class Settings
 
     public function addSettingsMenu()
     {
-        $page = add_submenu_page('lidmo', LIDMO_PREFIX_PLUGIN_NAME . ' Configurações', 'Configurações', 'lidmo_manage_options', $this->plugin_slug . '-settings', array($this, 'settingsPage'));
+        $page = add_submenu_page('lidmo', 'Configurações', 'Configurações', 'lidmo_manage_options', 'lidmo-settings', array($this, 'settingsPage'));
     }
 
     public function addSettingsLink($links, $plugin_file, $plugin_data, $context)
     {
 //        echo $plugin_file;
         if ($plugin_file === str_replace(WP_PLUGIN_DIR . '/', '', LIDMO_PREFIX_PLUGIN_FILE)) {
-            $settings_link = array('<a href="admin.php?page=' . $this->plugin_slug . '-settings">Configurações</a>');
+            $settings_link = array('<a href="admin.php?page=lidmo-settings">Configurações</a>');
             $links = array_merge($links, $settings_link);
         }
         return $links;
