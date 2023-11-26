@@ -21,9 +21,16 @@ class AdminMenuPages implements AdminInterface
     {
 
         $this->adminTemplatesPath = TemplatesInterface::ADMIN_TEMPLATES_FOLDER;
-        $this->page_slug = apply_filters('lidmo_admin_menu_page_slug', 'lidmo');
+        $this->page_slug = apply_filters('lidmo_admin_menu_slug', 'lidmo');
         if(!lidmo_admin_menu_exists($this->page_slug)) {
-            add_menu_page('Lídmo', 'Lídmo', 'lidmo_manage_options', $this->page_slug, [$this, 'getTemplate'], "dashicons-{$this->page_slug}", 10);
+            add_menu_page(
+                apply_filters('lidmo_admin_menu_page_title', 'Lídmo'),
+                apply_filters('lidmo_admin_menu_title', 'Lídmo'),
+                apply_filters('lidmo_admin_menu_capability', 'lidmo_manage_options'),
+                $this->page_slug,
+                [$this, 'getTemplate'],
+                apply_filters('lidmo_admin_menu_icon', "dashicons-{$this->page_slug}"),
+                10);
         }
         $this->setAdminPages();
 

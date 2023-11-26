@@ -3,6 +3,8 @@
 
 namespace LidmoPrefix\Traits;
 
+use LidmoPrefix\Support\Plugin;
+
 trait Settings
 {
     public function getSettingsTabTitle($tab)
@@ -15,8 +17,10 @@ trait Settings
 
     public function getSettingsSections()
     {
-        $settings = [
-            'lidmo-general' => [
+        $settings = (array) Plugin::getOption('', [], $this->page_slug);
+
+        if(!array_key_exists('lidmo-general', $settings)) {
+            $settings['lidmo-general'] = [
                 'default' => [
                     'title' => 'SMTP',
                     'description' => 'Configurações de SMTP',
@@ -70,9 +74,24 @@ trait Settings
                         ],
                     ],
                 ],
-            ],
-            $this->plugin_slug => apply_filters("lidmo_settings_{$this->plugin_slug}_section", []),
-        ];
+            ];
+        }
+
+        $settings[$this->plugin_slug] = apply_filters("lidmo_settings_{$this->plugin_slug}_section", ['default' => [
+            'title' => 'Teste',
+            'description' => 'Configurações de teste',
+            'fields' => [
+                [
+                    'id' => 'smtp_enabled',
+                    'label' => 'Ativar teste',
+                    'description' => 'Ativar teste',
+                    'type' => 'checkbox',
+                    'default' => ''
+                ],
+            ]
+        ]]);
+
+        update_option($this->page_slug, $settings);
 
         return $settings;
     }
