@@ -13,6 +13,7 @@ class Settings
     private $page_slug;
     private $options;
     private $settings;
+    private $titles;
     private $currentTab = 'lidmo-general';
 
     public function __construct()
@@ -29,6 +30,7 @@ class Settings
                 register_setting($tab, $tab, array($this, 'validateFields'));
             }
         }
+        $this->titles = $this->getSettingsTitles();
     }
 
     public function initSection($currentTab)
@@ -51,7 +53,7 @@ class Settings
 
     public function addSettingsMenu()
     {
-        if(!lidmo_admin_menu_exists($this->page_slug)) {
+        if(!lidmo_admin_menu_exists($this->page_slug, true)) {
             add_submenu_page(AdminMenuPages::getInstance()->getPageSlug(), 'Configurações', 'Configurações', 'lidmo_manage_options', $this->page_slug, array($this, 'settingsPage'));
         }
     }
@@ -236,7 +238,7 @@ class Settings
                     foreach ($data as $section => $d){
                         $menuSections[$tab][] = '<li><a href="#'.$section.'" class="">' . $d['title'] . '</a></li>';
                     }
-                    echo '<a href="admin.php?page=' . $this->page_slug . '&tab=' . $tab . '" class="nav-tab' . $activeTab . '">' . $this->getSettingsTabTitle($tab) . '</a>';
+                    echo '<a href="admin.php?page=' . $this->page_slug . '&tab=' . $tab . '" class="nav-tab' . $activeTab . '">' . apply_filters("lidmo_settings_{$tab}_tab_title", $this->titles[$tab] ?? 'Indefinido') . '</a>';
                 }
                 ?>
             </div>
