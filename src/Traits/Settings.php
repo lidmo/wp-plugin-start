@@ -7,19 +7,25 @@ use LidmoPrefix\Support\Plugin;
 
 trait Settings
 {
-    public function getSettingsTabTitle($tab)
+    public function getSettingsTitles()
     {
-        $titles = [
-            'lidmo-general' => 'Geral',
-        ];
-        return $titles[$tab] ?? apply_filters("lidmo_settings_{$tab}_tab_title", LIDMO_PREFIX_PLUGIN_NAME);
+        $titles = (array)Plugin::getOption('', [], $this->page_slug . '-titles');
+
+        if (!array_key_exists('lidmo-general', $titles)) {
+            $titles['lidmo-general'] = 'Geral';
+        }
+        $titles[$this->plugin_slug] = LIDMO_PREFIX_PLUGIN_NAME;
+
+        update_option($this->page_slug . '-titles', $titles);
+
+        return $titles;
     }
 
     public function getSettingsSections()
     {
-        $settings = (array) Plugin::getOption('', [], $this->page_slug);
+        $settings = (array)Plugin::getOption('', [], $this->page_slug);
 
-        if(!array_key_exists('lidmo-general', $settings)) {
+        if (!array_key_exists('lidmo-general', $settings)) {
             $settings['lidmo-general'] = [
                 'default' => [
                     'title' => 'SMTP',
