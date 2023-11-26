@@ -4,10 +4,10 @@ namespace LidmoPrefix\Hooks\Lidmo\Settings\Page;
 
 use Lidmo\WP\Foundation\Hooks\Hook;
 
-class Title extends Hook
+class SlugFilter extends Hook
 {
-    public function handle($page_title)
+    public function handle($page_slug)
     {
-        return $page_title;
+        return $page_slug;
     }
 }

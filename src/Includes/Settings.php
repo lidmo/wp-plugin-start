@@ -17,7 +17,6 @@ class Settings
 
     public function __construct()
     {
-
         $this->plugin_slug = LIDMO_PREFIX_PLUGIN_SLUG;
         $this->page_slug = apply_filters('lidmo_settings_page_slug', 'lidmo-settings');
     }
@@ -52,7 +51,9 @@ class Settings
 
     public function addSettingsMenu()
     {
-        add_submenu_page(AdminMenuPages::getInstance()->getPageSlug(), 'Configurações', 'Configurações', 'lidmo_manage_options', $this->page_slug, array($this, 'settingsPage'));
+        if(!lidmo_admin_menu_exists($this->page_slug)) {
+            add_submenu_page(AdminMenuPages::getInstance()->getPageSlug(), 'Configurações', 'Configurações', 'lidmo_manage_options', $this->page_slug, array($this, 'settingsPage'));
+        }
     }
 
     public function addSettingsLink()
