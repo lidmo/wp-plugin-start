@@ -7,6 +7,13 @@ use LidmoPrefix\Support\Plugin;
 
 trait Settings
 {
+
+    public function deleteSettingsSection()
+    {
+        Plugin::deleteOption($this->plugin_slug, $this->page_slug . '-titles');
+        Plugin::deleteOption($this->plugin_slug, $this->page_slug);
+    }
+
     public function getSettingsTitles()
     {
         $titles = (array)Plugin::getOption('', [], $this->page_slug . '-titles');
