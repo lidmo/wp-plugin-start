@@ -4,7 +4,7 @@ namespace LidmoPrefix\Hooks\Defaults;
 
 
 
-use LidmoPrefix\Support\Plugin;
+use LidmoPrefix\Support\Mail;
 
 class PHPMailerInitAction extends \Lidmo\WP\Foundation\Hooks\Hook
 {
@@ -12,18 +12,18 @@ class PHPMailerInitAction extends \Lidmo\WP\Foundation\Hooks\Hook
 
     public function handle($phpmailer)
     {
-        if(Plugin::getOption('smtp_enabled') === 'on'){
-            $user = Plugin::getOption('smtp_user', '');
-            $pass = Plugin::getOption('smtp_pass', '');
-            $secure = Plugin::getOption('smtp_secure', '');
+        if(Mail::getConfig('smtp_enabled') === 'on'){
+            $user = Mail::getConfig('smtp_user', '');
+            $pass = Mail::getConfig('smtp_pass', '');
+            $secure = Mail::getConfig('smtp_secure', '');
             $phpmailer->IsSMTP();
-            $phpmailer->Host = Plugin::getOption('smtp_host');
-            $phpmailer->Port = Plugin::getOption('smtp_port');
+            $phpmailer->Host = Mail::getConfig('smtp_host');
+            $phpmailer->Port = Mail::getConfig('smtp_port');
 
             if($user !== '' && $pass !== '') {
                 $phpmailer->SMTPAuth = true;
-                $phpmailer->Username = Plugin::getOption('smtp_user');
-                $phpmailer->Password = Plugin::getOption('smtp_pass');
+                $phpmailer->Username = Mail::getConfig('smtp_user');
+                $phpmailer->Password = Mail::getConfig('smtp_pass');
             }
 
             if($secure !== '') {

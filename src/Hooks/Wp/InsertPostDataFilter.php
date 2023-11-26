@@ -9,7 +9,6 @@ class InsertPostDataFilter extends Hook
 {
     public function handle($attributes)
     {
-        $pageTemplates = new PageTemplates();
-        return $pageTemplates->registerTemplates($attributes);
+        return PageTemplates::getInstance()->registerTemplates($attributes);
     }
 }

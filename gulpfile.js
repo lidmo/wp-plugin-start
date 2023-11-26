@@ -157,7 +157,6 @@ gulp.task('gulp:restart', function (done) {
 //Change the default gulp task to compile styles and scripts and then watch
 gulp.task('default', gulp.series('sass:compile', 'scripts:compile', 'watch'));
 
-var zipFileName = projectName + '.zip';
 var excludePaths = [
     './**',
     '!./node_modules/**',
@@ -165,6 +164,7 @@ var excludePaths = [
     '!./bin/**',
 ];
 gulp.task('export', function (done) {
+    var zipFileName = projectName + '-' + Date.now() + '.zip';
     return gulp.src(excludePaths, {base: '../'})
         .pipe(zip(zipFileName))
         .pipe(gulp.dest('..'))

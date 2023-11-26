@@ -4,8 +4,10 @@
 namespace LidmoPrefix\Includes;
 
 use LidmoPrefix\Interfaces\PagesTemplatesInterface;
+use LidmoPrefix\Traits\Singleton;
 
 class PageTemplates implements PagesTemplatesInterface{
+    use Singleton;
 	protected $templates;
 
 	protected $templates_path;

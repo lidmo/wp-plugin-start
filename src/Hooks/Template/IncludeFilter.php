@@ -9,7 +9,6 @@ class IncludeFilter extends Hook
 {
     public function handle($template)
     {
-        $pageTemplates = new PageTemplates();
-        return $pageTemplates->includeTemplates($template);
+        return PageTemplates::getInstance()->includeTemplates($template);
     }
 }

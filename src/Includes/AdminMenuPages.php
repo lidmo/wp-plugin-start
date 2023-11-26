@@ -15,16 +15,34 @@ class AdminMenuPages implements AdminInterface
 
     protected string $adminTemplatesPath;
 
+    private $page_slug;
+
     public function __construct()
     {
 
         $this->adminTemplatesPath = TemplatesInterface::ADMIN_TEMPLATES_FOLDER;
-        if(!lidmo_admin_menu_exists('lidmo')) {
-            $menuPage = add_menu_page('Lídmo', 'Lídmo', 'lidmo_manage_options', 'lidmo', [$this, 'getTemplate'], 'dashicons-lidmo', 10);
-            //add_action('admin_print_styles-' . $menuPage, 'lidmo_css');
+        $this->page_slug = apply_filters('lidmo_admin_menu_page_slug', 'lidmo');
+        if(!lidmo_admin_menu_exists($this->page_slug)) {
+            add_menu_page('Lídmo', 'Lídmo', 'lidmo_manage_options', $this->page_slug, [$this, 'getTemplate'], "dashicons-{$this->page_slug}", 10);
         }
         $this->setAdminPages();
 
+    }
+
+    public function getPageSlug()
+    {
+        return $this->page_slug;
+    }
+
+    public function generateDashicon()
+    {
+        echo '<style>
+    .dashicons-'. $this->page_slug .' {
+        background-image: url("' . LIDMO_PREFIX_PLUGIN_URL . '/assets/images/dashicon.png");
+        background-repeat: no-repeat;
+        background-position: center; 
+    }
+    </style>';
     }
 
     public function registerAdminPages()
@@ -35,7 +53,7 @@ class AdminMenuPages implements AdminInterface
             foreach ($pages as $page_slug => $menuPage) {
 
                 add_submenu_page(
-                    'lidmo',
+                    $this->page_slug,
                     $menuPage['page_title'],
                     $menuPage['menu_title'],
                     $menuPage['capability'],

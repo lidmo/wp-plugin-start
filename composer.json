@@ -19,17 +19,11 @@
       "LidmoPrefix\\": "src/"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "Lidmo\\WP\\Installer\\": "bin/Installer/"
-    }
-  },
   "require-dev": {
     "symfony/var-dumper": "^5.4",
     "wp-phpunit/wp-phpunit": "^6.1",
     "yoast/phpunit-polyfills": "^1.0",
-    "roots/wordpress": "^6.1",
-    "composer/composer": "dev-main"
+    "roots/wordpress": "^6.1"
   },
   "config": {
     "allow-plugins": {
@@ -38,7 +32,7 @@
   },
   "scripts": {
     "post-create-project-cmd": [
-      "Lidmo\\WP\\Installer\\PostCreateProject::changePrefix",
+      "Lidmo\\WP\\Foundation\\ComposerScripts::pluginInstall",
       "composer dump-autoload"
     ]
   }

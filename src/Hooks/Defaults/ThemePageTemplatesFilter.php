@@ -11,7 +11,6 @@ class ThemePageTemplatesFilter extends Hook
 
     public function handle($posts_templates)
     {
-        $pageTemplates = new PageTemplates();
-        return $pageTemplates->addNewTemplate($posts_templates);
+        return PageTemplates::getInstance()->addNewTemplate($posts_templates);
     }
 }

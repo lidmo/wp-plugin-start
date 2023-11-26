@@ -2,89 +2,88 @@
 
 namespace LidmoPrefix\Includes;
 
-use LidmoPrefix\Traits\Singleton;
 use LidmoPrefix\Traits\Settings as SettingsFields;
+use LidmoPrefix\Traits\Singleton;
 
 class Settings
 {
 
     use SettingsFields, Singleton;
 
-    private $plugin_slug;
+    private $page_slug;
     private $options;
     private $settings;
+    private $currentTab = 'lidmo-general';
 
     public function __construct()
     {
 
         $this->plugin_slug = LIDMO_PREFIX_PLUGIN_SLUG;
-
+        $this->page_slug = apply_filters('lidmo_settings_page_slug', 'lidmo-settings');
     }
 
     public function init()
     {
-        $this->settings = $this->getSettings();
+        foreach ($this->getSettingsSections() as $tab => $data) {
+            if(is_array($data) && count($data) > 0) {
+                $this->settings[$tab] = $data;
+                register_setting($tab, $tab, array($this, 'validateFields'));
+            }
+        }
+    }
+
+    public function initSection($currentTab)
+    {
+        $this->currentTab = $currentTab;
         $this->options = $this->getOptions();
-        $this->registerSettings();
+        foreach ($this->settings[$this->currentTab] as $section => $data) {
+
+            // Add section to page
+            add_settings_section($section, $data['title'], array($this, 'settingsSection'), $this->currentTab);
+
+            foreach ($data['fields'] as $field) {
+
+                // Add field to page
+                add_settings_field($field['id'], $field['label'], array($this, 'displayField'), $this->currentTab, $section, array('field' => $field));
+            }
+        }
     }
 
 
     public function addSettingsMenu()
     {
-        $page = add_submenu_page('lidmo', 'Configurações', 'Configurações', 'lidmo_manage_options', 'lidmo-settings', array($this, 'settingsPage'));
+        add_submenu_page(AdminMenuPages::getInstance()->getPageSlug(), 'Configurações', 'Configurações', 'lidmo_manage_options', $this->page_slug, array($this, 'settingsPage'));
     }
 
-    public function addSettingsLink($links, $plugin_file, $plugin_data, $context)
+    public function addSettingsLink()
     {
-//        echo $plugin_file;
-        if ($plugin_file === str_replace(WP_PLUGIN_DIR . '/', '', LIDMO_PREFIX_PLUGIN_FILE)) {
-            $settings_link = array('<a href="admin.php?page=lidmo-settings">Configurações</a>');
-            $links = array_merge($links, $settings_link);
+        if (isset($this->settings[$this->plugin_slug])) {
+            return "<a href='admin.php?page={$this->page_slug}&tab={$this->plugin_slug}'>Configurações</a>";
         }
-        return $links;
+        return "<a href='admin.php?page={$this->page_slug}'>Configurações</a>";
     }
 
     public function getOptions()
     {
-        $options = get_option($this->plugin_slug);
+        $options = get_option($this->currentTab);
 
-        if (!$options && is_array($this->settings)) {
-            $options = array();
-            foreach ($this->settings as $section => $data) {
+        if (!$options && is_array($this->settings[$this->currentTab])) {
+            $options = [];
+            foreach ($this->settings[$this->currentTab] as $section => $data) {
                 foreach ($data['fields'] as $field) {
                     $options[$field['id']] = $field['default'];
                 }
             }
 
-            add_option($this->plugin_slug, $options);
+            add_option($this->currentTab, $options);
         }
 
         return $options;
     }
 
-    public function registerSettings()
-    {
-        if (is_array($this->settings)) {
-
-            register_setting($this->plugin_slug, $this->plugin_slug, array($this, 'validateFields'));
-
-            foreach ($this->settings as $section => $data) {
-
-                // Add section to page
-                add_settings_section($section, $data['title'], array($this, 'settingsSection'), $this->plugin_slug);
-
-                foreach ($data['fields'] as $field) {
-
-                    // Add field to page
-                    add_settings_field($field['id'], $field['label'], array($this, 'displayField'), $this->plugin_slug, $section, array('field' => $field));
-                }
-            }
-        }
-    }
-
     public function settingsSection($section)
     {
-        $html = '<p class="settings-container--description"> ' . $this->settings[$section['id']]['description'] . '</p>' . "\n";
+        $html = '<p class="settings-container--description"> ' . $this->settings[$this->currentTab][$section['id']]['description'] . '</p>' . "\n";
         echo $html;
     }
 
@@ -92,14 +91,13 @@ class Settings
     {
 
         $field = $args['field'];
-
+        $type = $field['type'];
         $html = '';
-
-        $option_name = $this->plugin_slug . "[" . $field['id'] . "]";
-
+        $option_name = $this->currentTab . "[" . $field['id'] . "]";
         $data = (isset($this->options[$field['id']])) ? $this->options[$field['id']] : '';
+        $field['placeholder'] = $field['placeholder'] ?? '';
 
-        switch ($field['type']) {
+        switch ($type) {
 
             case 'text':
             case 'password':
@@ -167,9 +165,13 @@ class Settings
                 $html .= '</select> ';
                 break;
 
+            default:
+                $html = apply_filters("lidmo_settings_prepare_{$type}_field", $html, $field, $data, $option_name);
+                break;
+
         }
 
-        switch ($field['type']) {
+        switch ($type) {
 
             case 'checkbox_multi':
             case 'radio':
@@ -177,8 +179,17 @@ class Settings
                 $html .= '<br/><span class="description">' . $field['description'] . '</span>';
                 break;
 
-            default:
+            case 'text':
+            case 'text_secret':
+            case 'password':
+            case 'number':
+            case 'select':
+            case 'textarea':
+            case 'checkbox':
                 $html .= '<label for="' . esc_attr($field['id']) . '"><span class="description">' . $field['description'] . '</span></label>' . "\n";
+                break;
+            default:
+                $html = apply_filters("lidmo_settings_prepare_{$type}_label", $html, $field);
                 break;
         }
 
@@ -200,15 +211,15 @@ class Settings
         // 	return false;
         // }
 
-        return $data;
+        return apply_filters("lidmo_settings_{$this->currentTab}_validate_fields", $data);
     }
 
     public function settingsPage()
     {
-        // Build page HTML output
-        // If you don't need tabbed navigation just strip out everything between the <!-- Tab navigation --> tags.
+        $currentTab = wp_slash($_GET['tab'] ?? 'lidmo-general');
+        $this->initSection(wp_slash($currentTab));
         ?>
-        <div class="wrap" id="<?php echo $this->plugin_slug; ?>">
+        <div class="wrap" id="<?php echo $this->currentTab; ?>">
 
             <div class="settings-header">
                 <h1><?php echo $this->getSettingsPageTitle(); ?></h1>
@@ -217,17 +228,26 @@ class Settings
 
             <div class="nav-tab-wrapper settings-tabs hide-if-no-js">
                 <?php
-                foreach ($this->settings as $section => $data) {
-                    echo '<a href="#' . $section . '" class="nav-tab">' . $data['title'] . '</a>';
+                $menuSections = [];
+                foreach ($this->settings as $tab => $data) {
+                    $activeTab = $tab === $currentTab ? ' nav-tab-active' : '';
+                    $menuSections[$this->currentTab] = [];
+                    foreach ($data as $section => $d){
+                        $menuSections[$tab][] = '<li><a href="#'.$section.'" class="">' . $d['title'] . '</a></li>';
+                    }
+                    echo '<a href="admin.php?page=' . $this->page_slug . '&tab=' . $tab . '" class="nav-tab' . $activeTab . '">' . $this->getSettingsTabTitle($tab) . '</a>';
                 }
                 ?>
             </div>
             <?php $this->addScript(); ?>
 
             <form action="options.php" method="POST">
-                <?php settings_fields($this->plugin_slug); ?>
+                <?php if (count($menuSections[$this->currentTab]) > 0) {
+                    echo '<ul class="subsubsub settings-sublinks">' . implode('|', $menuSections[$this->currentTab]) . '</ul><br class="clear">';
+                } ?>
+                <?php settings_fields($this->currentTab); ?>
                 <div class="settings-container">
-                    <?php do_settings_sections($this->plugin_slug); ?>
+                    <?php do_settings_sections($this->currentTab); ?>
                 </div>
                 <?php submit_button(); ?>
             </form>
@@ -246,17 +266,17 @@ class Settings
                 var headings = jQuery('.settings-container > h2, .settings-container > h3');
                 var paragraphs = jQuery('.settings-container > p');
                 var tables = jQuery('.settings-container > table');
-                var triggers = jQuery('.settings-tabs a');
+                var triggers = jQuery('.settings-sublinks a');
 
                 triggers.each(function (i) {
                     triggers.eq(i).on('click', function (e) {
                         e.preventDefault();
-                        triggers.removeClass('nav-tab-active');
+                        triggers.removeClass('current');
                         headings.hide();
                         paragraphs.hide();
                         tables.hide();
 
-                        triggers.eq(i).addClass('nav-tab-active');
+                        triggers.eq(i).addClass('current');
                         headings.eq(i).show();
                         paragraphs.eq(i).show();
                         tables.eq(i).show();
