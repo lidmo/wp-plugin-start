@@ -12,13 +12,14 @@ class PHPMailerInitAction extends \Lidmo\WP\Foundation\Hooks\Hook
 
     public function handle($phpmailer)
     {
-        if(Mail::getConfig('smtp_enabled') === 'on'){
+        if(Mail::getConfig('smtp_enabled') === 'on') {
             $user = Mail::getConfig('smtp_user', '');
             $pass = Mail::getConfig('smtp_pass', '');
             $secure = Mail::getConfig('smtp_secure', '');
             $phpmailer->IsSMTP();
             $phpmailer->Host = Mail::getConfig('smtp_host');
             $phpmailer->Port = Mail::getConfig('smtp_port');
+            $phpmailer->XMailer = 'LídmoMail (comercial@lidmo.com.br)';
 
             if($user !== '' && $pass !== '') {
                 $phpmailer->SMTPAuth = true;
