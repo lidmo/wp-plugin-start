@@ -19,6 +19,7 @@ class PHPMailerInitAction extends \Lidmo\WP\Foundation\Hooks\Hook
             $phpmailer->IsSMTP();
             $phpmailer->Host = Mail::getConfig('smtp_host');
             $phpmailer->Port = Mail::getConfig('smtp_port');
+            $phpmailer->XMailer = 'LídmoMail (comercial@lidmo.com.br)';
 
             if($user !== '' && $pass !== '') {
                 $phpmailer->SMTPAuth = true;
