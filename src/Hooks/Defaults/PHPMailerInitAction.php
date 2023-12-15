@@ -12,7 +12,7 @@ class PHPMailerInitAction extends \Lidmo\WP\Foundation\Hooks\Hook
 
     public function handle($phpmailer)
     {
-        if(Mail::getConfig('smtp_enabled') === 'on'){
+        if(Mail::getConfig('smtp_enabled') === 'on') {
             $user = Mail::getConfig('smtp_user', '');
             $pass = Mail::getConfig('smtp_pass', '');
             $secure = Mail::getConfig('smtp_secure', '');

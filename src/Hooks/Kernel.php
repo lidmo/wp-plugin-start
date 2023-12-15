@@ -24,6 +24,8 @@ class Kernel extends HooksKernel
         \LidmoPrefix\Hooks\Defaults\ThemePageTemplatesFilter::class,
         \LidmoPrefix\Hooks\Defaults\TheContentFilter::class,
         \LidmoPrefix\Hooks\Wp\InsertPostDataFilter::class,
+        \LidmoPrefix\Hooks\Wp\MailFromFilter::class,
+        \LidmoPrefix\Hooks\Wp\MailFromNameFilter::class,
         \LidmoPrefix\Hooks\Template\IncludeFilter::class,
 
     ];

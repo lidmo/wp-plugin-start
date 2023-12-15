@@ -85,6 +85,20 @@ trait Settings
                             ],
                             'default' => '',
                         ],
+                        [
+                            'id' => 'smtp_from_name',
+                            'label' => 'Nome do remetente',
+                            'description' => 'Define o nome do remetente',
+                            'type' => 'text',
+                            'default' => '',
+                        ],
+                        [
+                            'id' => 'smtp_from_email',
+                            'label' => 'Email do remetente',
+                            'description' => 'Define o email do remetente',
+                            'type' => 'text',
+                            'default' => '',
+                        ],
                     ],
                 ],
             ];
