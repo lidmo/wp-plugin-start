@@ -42,4 +42,25 @@ class Plugin
     {
         return self::getPrefix($prefix) . '_' . $name;
     }
+
+    public static function getDBPrefix(string $prefix = LIDMO_PREFIX_PLUGIN_SLUG): string
+    {
+        global $wpdb;
+        return $wpdb->prefix . self::getPrefix() . '_';
+    }
+
+    public static function getDatatable()
+    {
+        if(class_exists('Ozdemir\Datatables\Datatables')) {
+            $config = [
+                'host' => DB_HOST,
+                'port' => '3306',
+                'username' => DB_USER,
+                'password' => DB_PASSWORD,
+                'database' => DB_NAME
+            ];
+            return new \Ozdemir\Datatables\Datatables(new \Ozdemir\Datatables\DB\MySQL($config));
+        }
+        return null;
+    }
 }

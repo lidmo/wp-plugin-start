@@ -12,4 +12,19 @@ class Arr
         }
         return $new_array;
     }
+
+
+    public static function getDotNotation($data, $key, $default = '')
+    {
+        if (isset($data[$key])) {
+            return $data[$key];
+        }
+        foreach (explode('.', $key) as $segment) {
+            if (!is_array($data) || !array_key_exists($segment, $data)) {
+                return $default;
+            }
+            $data = $data[$segment];
+        }
+        return $data;
+    }
 }
