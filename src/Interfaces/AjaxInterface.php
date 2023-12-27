@@ -6,7 +6,7 @@ namespace LidmoPrefix\Interfaces;
 Interface AjaxInterface {
 
     const ACTIONS = [
-        /*'lidmo_primetires_tires_term_list' => [
+        /*'lidmo_prefix_test' => [
             'controller' => '',
             'method' => 'termList',
             'nopriv'   => true,
